@@ -2,12 +2,14 @@ FROM python:3.12
 
 WORKDIR /app
 
-COPY ./model/regression.joblib /app
+RUN mkdir -p /app/model
+
+COPY ./model/regression.joblib /app/model/
 COPY ./fast_api.py /app
 COPY ./model_utils.py /app
 
-RUN pip install --no-cache-dir fastapi uvicorn joblib
+RUN pip install --no-cache-dir fastapi[standard] uvicorn joblib scikit-learn
 
-EXPOSE 8000
+EXPOSE 8114
 
-CMD ["fastapi", "dev", ".\fast_api.py"]
+CMD ["python3", "fast_api.py"]
