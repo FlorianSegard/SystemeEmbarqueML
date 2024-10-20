@@ -1,0 +1,7 @@
+version: '3'
+services:
+  house-price-prediction:
+    image: house-price-prediction
+    build: .
+    ports:
+      - "8114:8114"
