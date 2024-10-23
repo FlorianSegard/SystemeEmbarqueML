@@ -22,5 +22,4 @@ jobs:
 
       - run: docker pull ${{ secrets.DOCKER_USERNAME }}/embarqueml
 
-      - run: docker run -d -p 8114:8114 ${{ secrets.DOCKER_USERNAME }}/embarqueml
-#fizvb
+      - run: docker run -p 8114:8114 -d ${{ secrets.DOCKER_USERNAME }}/embarqueml
