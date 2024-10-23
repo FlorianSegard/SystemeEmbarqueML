@@ -20,7 +20,7 @@ jobs:
 
       - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no << 'EOF'
 
-      - run: docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml
+      - run: docker image pull ${{ secrets.DOCKER_USERNAME }}/embarqueml
       
       # - run: | 
       #     mkdir -p ~/.ssh
