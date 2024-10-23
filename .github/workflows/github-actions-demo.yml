@@ -25,6 +25,6 @@ jobs:
       #     ssh-keyscan -H ${{ secrets.VM_LOGIN }} >> ~/.ssh/known_hosts
       
       # - run: ssh ubuntu@${{ secrets.VM_LOGIN }} "docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml"
-      - run: sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no << 'EOF'
+      - run: sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no
       - run: docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml
       # - run: "(re)start container" gznfapoeizfezgr
