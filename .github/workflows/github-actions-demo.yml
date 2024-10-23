@@ -18,6 +18,10 @@ jobs:
 
       - run: docker push ${{ secrets.DOCKER_USERNAME }}/embarqueml
 
+      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no << 'EOF'
+
+      - run: docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml
+      
       # - run: | 
       #     mkdir -p ~/.ssh
       #     echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
@@ -25,5 +29,5 @@ jobs:
       #     ssh-keyscan -H ${{ secrets.VM_LOGIN }} >> ~/.ssh/known_hosts
       
       # - run: ssh ubuntu@${{ secrets.VM_LOGIN }} "docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml"
-      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no << 'EOF'
+
       # - run: "(re)start container" gznfapoeizfezgr
