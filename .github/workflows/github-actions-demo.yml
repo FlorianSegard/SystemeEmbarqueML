@@ -1,0 +1,23 @@
+name: GitHub Actions Demo
+
+on: [push]
+
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - use: action/checkout
+
+      - run: docker compose build house-price-prediction
+
+      - run: docker tag house-price-prediction floriansgd/embarqueml
+
+      - run: echo ${{secrets.DOCKER_PASSWORD}} | docker login -p --username=${{secrets.DOCKER_USERNAME}}
+
+      - run: docker push floriansgd/embarqueml
+
+      - run: echo ${{VM_PASSWORD}} | ssh ubuntu@17.2.2.1 "docker compose pull floriansgd/embarqueml"
+
+      - run: "(re)start container"
