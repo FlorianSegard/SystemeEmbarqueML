@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-      - use: action/checkout
+      - uses: action/checkout
 
       - run: docker compose build house-price-prediction
 
