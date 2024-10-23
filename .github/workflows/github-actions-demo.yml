@@ -26,4 +26,4 @@ jobs:
       
       - run: ssh ubuntu@${{ secrets.VM_LOGIN }} "docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml"
 
-      # - run: "(re)start container" gznfapoeiz
+      # - run: "(re)start container" gznfapoeizfezgr
