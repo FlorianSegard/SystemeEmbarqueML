@@ -18,12 +18,13 @@ jobs:
 
       - run: docker push ${{ secrets.DOCKER_USERNAME }}/embarqueml
 
-      - run: | 
-          mkdir -p ~/.ssh
-          echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.VM_LOGIN }} >> ~/.ssh/known_hosts
+      # - run: | 
+      #     mkdir -p ~/.ssh
+      #     echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     ssh-keyscan -H ${{ secrets.VM_LOGIN }} >> ~/.ssh/known_hosts
       
-      - run: ssh ubuntu@${{ secrets.VM_LOGIN }} "docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml"
-
+      # - run: ssh ubuntu@${{ secrets.VM_LOGIN }} "docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml"
+      - run: sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no << 'EOF'
+      - run: docker compose pull ${{ secrets.DOCKER_USERNAME }}/embarqueml
       # - run: "(re)start container" gznfapoeizfezgr
