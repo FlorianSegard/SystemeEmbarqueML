@@ -18,4 +18,4 @@ jobs:
 
       - run: docker push ${{ secrets.DOCKER_USERNAME }}/embarqueml
 
-      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no docker pull ${{ secrets.DOCKER_USERNAME }}/embarqueml;  docker run -p 8114:8114 -d floriansgd/embarqueml
+      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no docker pull ${{ secrets.DOCKER_USERNAME }}/embarqueml;  docker run -p 8114:8114 -d floriansgd/embarqueml << 'EOF'
