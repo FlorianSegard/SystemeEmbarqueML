@@ -12,6 +12,10 @@ jobs:
 
       - run: docker compose build house-price-prediction
 
+      - name: List files for debugging
+        run: ls -la
+
+
       - run: docker tag house-price-prediction ${{ secrets.DOCKER_USERNAME }}/embarqueml:latest
 
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -20,4 +24,4 @@ jobs:
 
       - run: sshpass -p "${{ secrets.VM_PASSWORD }}" scp -o StrictHostKeyChecking=no docker_pull_and_run.sh ubuntu@${{ secrets.VM_LOGIN }}:/home/ubuntu/
 
-      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no sh docker_pull_and_run.sh
+      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no sh /home/ubuntu/docker_pull_and_run.sh
