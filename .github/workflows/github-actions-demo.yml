@@ -12,10 +12,12 @@ jobs:
 
       - run: docker compose build house-price-prediction
 
-      - run: docker tag house-price-prediction ${{ secrets.DOCKER_USERNAME }}/embarqueml
+      - run: docker tag house-price-prediction ${{ secrets.DOCKER_USERNAME }}/embarqueml:latest
 
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - run: docker push ${{ secrets.DOCKER_USERNAME }}/embarqueml
 
-      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no docker pull ${{ secrets.DOCKER_USERNAME }}/embarqueml;  docker run -p 8114:8114 floriansgd/embarqueml
+      - run: scp 
+
+      - run: sshpass -p "${{ secrets.VM_PASSWORD }}" ssh ubuntu@${{ secrets.VM_LOGIN }} -o StrictHostKeyChecking=no sh docker_pull_and_run.sh
